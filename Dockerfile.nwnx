@@ -1,18 +1,19 @@
 # Declared here to be used by the FROM below
 ARG NWN_VERSION
+ARG NWNX_VERSION
 ARG NWN_TAG
 ARG NWN_VERSION_SUFFIX
 
 FROM i386/debian:stretch-slim as builder
 
 # Declared here to be used inside the builder
-ARG NWN_VERSION
+ARG NWNX_VERSION
 
 RUN apt-get update
 
 RUN apt-get -y install unzip
 RUN mkdir -p /nwn/nwnx
-ADD https://code.nwnx.io/nwnxee/unified/-/jobs/artifacts/build${NWN_VERSION}/download?job=build /nwn/nwnx/temp
+ADD https://gitlab.com/glorwinger/nwnx-unified/-/jobs/artifacts/${NWNX_VERSION}/download?job=build /nwn/nwnx/temp
 RUN unzip -j /nwn/nwnx/temp -d /nwn/nwnx
 
 RUN rm -r /var/cache/apt /var/lib/apt/lists
