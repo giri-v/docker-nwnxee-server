@@ -10,7 +10,7 @@ while getopts ":hljt:x:v:r:s:" o; do
             DOCKERFILE=Dockerfile.nwnx.local
             ;;
         j) # Build image using including openjdk-8-headless
-            DOCKERFILE=Dockerfile.java.nwnx
+            DOCKERFILE=Dockerfile.nwnx.java
             ;;
         r) # Base Image Repository - eg glorwinger/nwserver
             REPOSITORY=${OPTARG}
