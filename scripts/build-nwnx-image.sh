@@ -4,28 +4,17 @@ usage() { echo "$0 usage:" && grep " .)\ #" $0; exit 0; }
 
 DOCKERFILE=Dockerfile.nwnx
 
-while getopts ":hljt:x:v:r:s:" o; do
+while getopts ":hjt:v:z:" o; do
     case "${o}" in
-        l) # Build image using local nwnx binaries in local Binaries folder
-            DOCKERFILE=Dockerfile.nwnx.local
-            ;;
         j) # Build image using including openjdk-8-headless
             DOCKERFILE=Dockerfile.nwnx.java
+            JAVATAG=.java
             ;;
-        r) # Base Image Repository - eg glorwinger/nwserver
-            REPOSITORY=${OPTARG}
-            ;;
-        t) # Image Tag - eg glorwinger/nwserver:8152.nwnx
-            TAG=${OPTARG}
-            ;;
-        s) # Base Image Suffix - Will be appended to the version to identify the base image - eg .1
-            SUFFIX=${OPTARG}
-            ;;
-        v) # Headstart Build Number - eg 8152
+        v) # Headstart Build Number - eg 8159
             VERSION=${OPTARG}
             ;;
-        x) # NWNX Build Number - eg build8152 or master
-            NWNX_VERSION=${OPTARG}
+        z) # Location of the NWNX Libraries Zip File eg ./Binaries or https://21-117715326-gh.circle-artifacts.com/0/root/project/Binaries/NWNX-EE.zip
+            NWNX_ZIP=${OPTARG}
             ;;
         h | *) # Display help
             usage
@@ -35,8 +24,11 @@ while getopts ":hljt:x:v:r:s:" o; do
 done
 shift $((OPTIND-1))
 
-if [ -z "${TAG}" ] || [ -z "${VERSION}" ] || [ -z "${REPOSITORY}" ] || [ -z "${NWNX_VERSION}" ]; then
+if [[ ( -z ${VERSION} ) || ( ${DOCKERFILE} == "Dockerfile.nwnx.java" && -n ${NWNX_ZIP} ) ]]; then
+    echo ""
+    echo "Required arguments -v <version> and either -j or -n <location of NWNX Library Zip File>"
     usage
+    echo ""
 fi
 
-docker build -t ${TAG} --build-arg NWN_VERSION=${VERSION} --build-arg NWN_TAG=${REPOSITORY} --build-arg NWN_VERSION_SUFFIX=${SUFFIX} --build-arg NWNX_VERSION=${NWNX_VERSION} . -f ${DOCKERFILE}
+docker build -t nwnx/nwserver:${VERSION}${JAVATAG} --build-arg NWN_VERSION=${VERSION} --build-arg NWNX_ZIP=${NWNX_ZIP} . -f ${DOCKERFILE}

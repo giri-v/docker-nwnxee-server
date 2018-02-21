@@ -1,11 +1,9 @@
 # Declared here to be used by the FROM below
 ARG NWN_VERSION
-ARG NWNX_VERSION
-ARG NWN_TAG
-ARG NWN_VERSION_SUFFIX
+ARG LIBRARIES
 
-FROM ${NWN_TAG}:${NWN_VERSION}${NWN_VERSION_SUFFIX}
-LABEL maintainer "niv@beamdog.com"
+FROM nwnx/nwserver:${NWN_VERSION}
+LABEL maintainer "glorwinger"
 
 RUN mkdir -p /usr/share/man/man1
 RUN apt-get update && \
