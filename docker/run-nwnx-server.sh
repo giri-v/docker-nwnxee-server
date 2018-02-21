@@ -7,10 +7,11 @@ HOMEPATH=/nwn/run
 
 # Setup custom nwnx plugin folder 
 if [ -d $ROHOMEPATH/nwnx ]; then
-  if find "$ROHOMEPATH/nwnx/*.so" -mindepth 1 -print -quit | grep -q .; then
-    echo "[*] Copying custom plugin(s) to nwnx folder"
-    cp -v $ROHOMEPATH/nwnx/*.so /nwn/nwnx
-  fi
+    if test -n "$(find $ROHOMEPATH/nwnx -name '*.so' -print -quit)"
+    then
+        echo "[*] Copying any custom NWNX plugins"
+        cp -v $ROHOMEPATH/nwnx/*.so /nwn/nwnx
+    fi
 fi
 
 /nwn/run-server.sh
