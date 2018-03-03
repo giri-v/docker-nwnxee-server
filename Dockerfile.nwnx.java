@@ -2,7 +2,7 @@
 ARG NWN_VERSION
 ARG LIBRARIES
 
-FROM nwnx/nwserver:${NWN_VERSION}
+FROM nwnxee/nwserver:${NWN_VERSION}
 LABEL maintainer "glorwinger"
 
 RUN mkdir -p /usr/share/man/man1

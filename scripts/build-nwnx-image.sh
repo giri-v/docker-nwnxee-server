@@ -31,4 +31,4 @@ if [[ ( -z ${VERSION} ) || ( ${DOCKERFILE} == "Dockerfile.nwnx.java" && -n ${NWN
     echo ""
 fi
 
-docker build -t nwnx/nwserver:${VERSION}${JAVATAG} --build-arg NWN_VERSION=${VERSION} --build-arg NWNX_ZIP=${NWNX_ZIP} . -f ${DOCKERFILE}
+docker build -t nwnxee/nwserver:${VERSION}${JAVATAG} --build-arg NWN_VERSION=${VERSION} --build-arg NWNX_ZIP=${NWNX_ZIP} . -f ${DOCKERFILE}
