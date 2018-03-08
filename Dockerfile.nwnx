@@ -20,7 +20,7 @@ FROM beamdog/nwserver:${NWN_VERSION}
 LABEL maintainer "glorwinger"
 
 RUN apt-get update && \
-  apt-get -y install libmariadbclient18:i386 ruby && \
+  apt-get -y install libmariadbclient18:i386 libpq-dev ruby && \
   rm -r /var/cache/apt /var/lib/apt/lists
 
 # Don't mirror logs to stdout, NWNX_ServerLogRedirector takes care of that.

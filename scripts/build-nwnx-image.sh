@@ -4,7 +4,7 @@ usage() { echo "$0 usage:" && grep " .)\ #" $0; exit 0; }
 
 DOCKERFILE=Dockerfile.nwnx
 
-while getopts ":hjt:v:z:" o; do
+while getopts ":hjt:v:s:z:" o; do
     case "${o}" in
         j) # Build image using including openjdk-8-headless
             DOCKERFILE=Dockerfile.nwnx.java
@@ -13,7 +13,10 @@ while getopts ":hjt:v:z:" o; do
         v) # Headstart Build Number - eg 8159
             VERSION=${OPTARG}
             ;;
-        z) # Location of the NWNX Libraries Zip File eg ./Binaries or https://21-117715326-gh.circle-artifacts.com/0/root/project/Binaries/NWNX-EE.zip
+        s) # Optional suffix for the image tag - eg .1
+            SUFFIX=${OPTARG}
+            ;;
+        z) # Location of the NWNX Libraries Zip File eg ./Binaries/NWNX-EE.zip or https://21-117715326-gh.circle-artifacts.com/0/root/project/Binaries/NWNX-EE.zip
             NWNX_ZIP=${OPTARG}
             ;;
         h | *) # Display help
@@ -31,4 +34,4 @@ if [[ ( -z ${VERSION} ) || ( ${DOCKERFILE} == "Dockerfile.nwnx.java" && -n ${NWN
     echo ""
 fi
 
-docker build -t nwnxee/nwserver:${VERSION}${JAVATAG} --build-arg NWN_VERSION=${VERSION} --build-arg NWNX_ZIP=${NWNX_ZIP} . -f ${DOCKERFILE}
+docker build -t nwnxee/nwserver:${VERSION}${JAVATAG}${SUFFIX} --build-arg SUFFIX=${SUFFIX} --build-arg NWN_VERSION=${VERSION} --build-arg NWNX_ZIP=${NWNX_ZIP} . -f ${DOCKERFILE}

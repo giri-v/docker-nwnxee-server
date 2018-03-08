@@ -10,7 +10,8 @@ The Docker Multistage build executes the following:
 
 * Pass arguments to specify the following:
 	* -v NWN_VERSION - Head start version
-	* -z NWNX_ZIP - Location of the NWNX Libraries Zip File eg ./Binaries https://21-117715326-gh.circle-artifacts.com/0/root/project/Binaries/NWNX-EE.zip 
+	* -s SUFFIX - Optional suffix for the image tag - eg .1
+	* -z NWNX_ZIP - Location of the NWNX Libraries Zip File eg ./Binaries/NWNX-EE.zip https://21-117715326-gh.circle-artifacts.com/0/root/project/Binaries/NWNX-EE.zip 
 * Creates a builder image that downloads the NWNX bineries for the specified version and unpacks them
 * Creates the main image from the Beamdog dedicated server base image
 * Copies the unpacked NWNX files from the builder image

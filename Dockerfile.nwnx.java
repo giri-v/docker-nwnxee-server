@@ -1,8 +1,8 @@
 # Declared here to be used by the FROM below
 ARG NWN_VERSION
-ARG LIBRARIES
+ARG SUFFIX
 
-FROM nwnxee/nwserver:${NWN_VERSION}
+FROM nwnxee/nwserver:${NWN_VERSION}${SUFFIX}
 LABEL maintainer "glorwinger"
 
 RUN mkdir -p /usr/share/man/man1

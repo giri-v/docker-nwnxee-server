@@ -1,0 +1,71 @@
+version: "2.3"
+services:
+  nwnserver:
+    image: nwnxee/nwserver:8162
+    ports:
+      - "5121:5121/udp"
+    links:
+      - "db:db"
+    environment:
+      NWN_PORT: 5121
+      NWN_MODULE: 
+      NWN_SERVERNAME: 
+      NWN_PUBLICSERVER: 1
+      NWN_MAXCLIENTS: 96
+      NWN_MINLEVEL: 1
+      NWN_MAXLEVEL: 40
+      NWN_PAUSEANDPLAY: 0
+      NWN_PVP: 2
+      NWN_SERVERVAULT: 1
+      NWN_ELC: 1
+      NWN_ILR: 1
+      NWN_GAMETYPE: 0
+      NWN_ONEPARTY: 1
+      NWN_DIFFICULTY: 3
+      NWN_AUTOSAVEINTERVAL: 0
+      NWN_RELOADWHENEMPTY: 0
+      NWN_PLAYERPASSWORD: 
+      NWN_DMPASSWORD: 
+      NWN_ADMINPASSWORD: 
+      NWNX_ADMINISTRATION_SKIP: y
+      NWNX_BEHAVIOURTREE_SKIP: y
+      NWNX_CHAT_SKIP: y
+      NWNX_CREATURE_SKIP: y
+      NWNX_EVENTS_SKIP: y
+      NWNX_DATA_SKIP: y
+      NWNX_METRICS_INFLUXDB_SKIP: y
+      NWNX_OBJECT_SKIP: y
+      NWNX_PLAYER_SKIP: y
+      NWNX_RUBY_SKIP: y
+      NWNX_SERVERLOGREDIRECTOR_SKIP: n
+      NWNX_SQL_SKIP: n
+      NWNX_THREADWATCHDOG_SKIP: y
+      NWNX_TRACKING_SKIP: y
+      # Configure DB
+      NWNX_SQL_TYPE: POSTGRESQL
+      NWNX_SQL_HOST: db
+      NWNX_SQL_USERNAME: 
+      NWNX_SQL_PASSWORD: 
+      NWNX_SQL_DATABASE: 
+    volumes:
+      - .:/nwn/home
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    restart: unless-stopped
+    image: postgres:9.6.8-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+    volumes:
+      - ./postgresql:/var/lib/postgresql:rw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 15s
+      timeout: 30s
+      retries: 20
