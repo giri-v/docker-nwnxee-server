@@ -10,4 +10,5 @@ RUN apt-get update && \
   apt-get -y install openjdk-8-jdk-headless && \
   rm -r /var/cache/apt /var/lib/apt/lists
 
+ENV NWNX_JVM_CLASSPATH=/nwn/run/nwnx/org.nwnx.nwnx2.jvm.jar
 
