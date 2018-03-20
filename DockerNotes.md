@@ -25,7 +25,7 @@ You don’t have to deal directly with the physical environment outside the cont
 common set of infrastructure that any automobile can use.  Docker provides common infrastructure enabling software containers 
 to run on multiple platforms.  
 
-### Why Continaers and not Virtual Machines?
+### Why Contianers and not Virtual Machines?
 
 Virtual Machines have been around longer and can provide a similar "Build and image once and run anywhere" experience. Containers however can offer 
 several advantages:
