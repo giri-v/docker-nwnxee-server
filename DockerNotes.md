@@ -1,12 +1,39 @@
 # Using Docker
 
-**Intended audience: builders**
+**Intended audience: Server Administrators**
 
 This document covers running nwserver in docker containers.
 
 *Note to Windows users: At the time of writing there are no Windows images for nwserver and NWNX:EE does not have 100% Windows support yet. Consequently, running nwserver in a docker container is limited to Linux. The software used to run Linux containers on Windows depends on the presence of Hyper-V support, a gated feature only available on Windows Professional and above. For Windows Home users the replacement for Hyper-V is Virtual Machines, and the program [DockerToolbox](https://docs.docker.com/toolbox/overview/) handles this very well by utilizing VirtualBox.*
 
-*Note to OSX users: I don't run OSX and neither does anyone else at BoP. If anyone wants to fill this guide please go ahead.*
+*Note to OSX users: Docker provides a native installation for MacOS so the commands below will work on MacOS.*
+
+## What is Docker and what are Containers?
+
+### What are containers?
+
+One way to describe the concept of Docker containers is to describe and automobile it's functions.
+
+Your car does a few things:
+
+* Removes you from dealing directly with the road
+* Removes you from dealing directly with the weather
+* Allows you to deal with the path of travel using functions inside the car (e.g., steering wheel, lights, and brakes)
+* Provides features such as air conditioning and heat that keep you comfortable
+
+In other words, your automobile is a container that provides features to guide it, and yourself, down the road. 
+You don’t have to deal directly with the physical environment outside the container.  That outside environment provides a 
+common set of infrastructure that any automobile can use.  Docker provides common infrastructure enabling software containers 
+to run on multiple platforms.  
+
+### Why Continaers and not Virtual Machines?
+
+Virtual Machines have been around longer and can provide a similar "Build and image once and run anywhere" experience. Containers however can offer 
+several advantages:
+
+* Containers are smaller than Virtual Machines - containers only include the minimum requirements needed to run an application
+* Containers have less overhead - since containers 'share' the host OS services they have better performance on a per application basis
+* Containers have better host CPU and memory utilization - containers don't contain a full instance of the OS, are very lightweight and less overhead than virtual machines.
 
 
 ## Dependencies
