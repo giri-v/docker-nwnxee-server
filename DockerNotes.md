@@ -37,13 +37,14 @@ several advantages:
 
 ## Dependencies
 
-* docker
-** Windows 10 Pro - Install Docker CE https://docs.docker.com/docker-for-windows/install/
-** Windows 7, Windows 8, Windows 10 Home - Install Docker Toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
-** MacOS - Install Docker CE https://docs.docker.com/docker-for-mac/install/
-** Linux - Install Docker CE for your Linux distribution https://docs.docker.com/install/
-* docker-compose (optional but highly recommended)
-
+* docker [Reference](https://docs.docker.com/edge/engine/reference/commandline/docker/)
+    * Windows 10 Pro - Install Docker CE https://docs.docker.com/docker-for-windows/install/
+    * Windows 7, Windows 8, Windows 10 Home - Install Docker Toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
+    * MacOS - Install Docker CE https://docs.docker.com/docker-for-mac/install/
+    * Linux - Install Docker CE for your Linux distribution https://docs.docker.com/install/
+* docker-compose [Reference](https://docs.docker.com/compose/compose-file/compose-file-v2/)
+    * Docker for Windows and Docker Toobox have docker-compose included - no additional steps are required
+    * Docker for Mac or Linux - Follow the steps here https://docs.docker.com/compose/install/
 
 ## Configure
 
@@ -52,12 +53,47 @@ Configuration is esily managed using `docker-compose`. You can find an example i
 ## Run
 
 ### With docker-compose
+When using docker compose it is best to have the current working direct the same folder as the docker-compose.yml file.  You can use a commandline 
+option to give the path and file but if you do ensure all paths for volume mounts etc. are absolute and not relative.
+
+1. This command will start all services listed in the compose file and run them in the background
 ```
 docker-compose up -d
 ```
-Stop (and remove all containers including volumes) with
+
+2. Stop all containers in the compose file
 ```
 docker-compose stop
+```
+
+3. Remove all stopped containers in the compose file
+```
+docker-compose rm
+```
+
+4. Stop and Remove all containers in the compose file
+```
+docker-compose down
+```
+
+5. View and follow docker logs 
+```
+docker-compose logs -f
+```
+
+6. This command will start the named service in the compose file and run it in the background
+```
+docker-compose up -d <service name>
+```
+
+7. Stop the named service in the compose file
+```
+docker-compose stop <service name>
+```
+
+8. Remove the named service in the compose file 
+```
+docker-compose rm <service name>
 ```
 
 
