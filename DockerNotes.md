@@ -96,22 +96,34 @@ docker-compose stop <service name>
 docker-compose rm <service name>
 ```
 
+9. Start a shell in the running container
+```
+docker exec -it (container name) /bin/bash
+```
 
-### Without docker-compose
+10. Attach to the running shell
+```
+docker attach (container name)
+```
+Detach safely with `ctrl+p ctrl+q`
+
+11. List containers
+```
+docker ps
+```
+
+12. List stopped containers
+```
+docker ps -a
+```
+
+### Review docker-compose
 
 For questions regarding the nwserver image, please refer to the [image documentation](https://hub.docker.com/r/beamdog/nwserver/).
 
-*Note: The db instructions are subject to change as I have not tested db connection on NWNX:EE yet.*
-
 #### Create the database container
 ```
-docker pull mysql:5.7
-docker run \
-  --name nwn-mysql \
-  -v $(pwd)/docker/mysql-db:/docker-entrypoint-initdb.d \
-  -e MYSQL_ROOT_PASSWORD=password \
-  -d \
-  mysql:5.7
+docker-compose up -d db
 ```
 
 #### Create the nwserver container
@@ -120,35 +132,12 @@ To function properly, the container needs access to the
 - database container
 
 ```
-docker run -it \
-  -v $(pwd)/server:/nwn/home \
-  --link nwn-mysql:mysql \
-  -p 5121:5121/udp \
-  --name nwn-devbase-test \
-  beamdog/nwserver:latest
+docker-compose up -d nwnserver
 ```
 
 `-v` mounts a host directory as a volume in the container. `--link nwn-mysql:mysql` creates a link between the mysql container and the nwn-devbase-test container. Note: the name following the colon - *mysql* in this case - is the name of the server, and must correspond with the database server specified in the nwnx2.ini, but this should work out of the box unless it has been changed in the Dockerfile. `-p` specifies which container ports to expose to the host system. Docker will not expose UDP by default and must be specified to enable nwserver connections.
 
 If you need haks, overrides, or other custom files they should be placed in the *server* directory.
-
-#### Restarting the container
-From now on you should only need the following two commands to start and stop the server.
-```
-docker restart nwn-devbase-test
-docker stop nwn-devbase-test
-```
-
-#### Claim a shell in the running server
-```
-docker exec -it nwn-devbase-test /bin/bash
-```
-
-#### Attach to the running shell
-```
-docker attach nwn-devbase-test
-```
-Detach safely with `ctrl+p ctrl+q`
 
 
 ## Play
