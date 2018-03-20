@@ -4,9 +4,8 @@
 
 This document covers running nwserver in docker containers.
 
-*Note to Windows users: At the time of writing there are no Windows images for nwserver and NWNX:EE does not have 100% Windows support yet. Consequently, running nwserver in a docker container is limited to Linux. The software used to run Linux containers on Windows depends on the presence of Hyper-V support, a gated feature only available on Windows Professional and above. For Windows Home users the replacement for Hyper-V is Virtual Machines, and the program [DockerToolbox](https://docs.docker.com/toolbox/overview/) handles this very well by utilizing VirtualBox.*
-
-*Note to OSX users: Docker provides a native installation for MacOS so the commands below will work on MacOS.*
+* Note to Windows users: At the time of writing there are no Windows images for nwserver and NWNX:EE does not have 100% Windows support yet. Consequently, running nwserver in a docker container is limited to Linux. The software used to run Linux containers on Windows depends on the presence of Hyper-V support, a gated feature only available on Windows Professional and above. For Windows Home users the replacement for Hyper-V is Virtual Machines, and the program [DockerToolbox](https://docs.docker.com/toolbox/overview/) handles this very well by utilizing VirtualBox.*
+* Note to OSX users: Docker provides a native installation for MacOS so the commands below will work on MacOS.*
 
 ## What is Docker and what are Containers?
 
@@ -39,6 +38,10 @@ several advantages:
 ## Dependencies
 
 * docker
+** Windows 10 Pro - Install Docker CE https://docs.docker.com/docker-for-windows/install/
+** Windows 7, Windows 8, Windows 10 Home - Install Docker Toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
+** MacOS - Install Docker CE https://docs.docker.com/docker-for-mac/install/
+** Linux - Install Docker CE for your Linux distribution https://docs.docker.com/install/
 * docker-compose (optional but highly recommended)
 
 
