@@ -11,7 +11,7 @@ This document covers running nwserver in docker containers.
 
 ### What is Docker?
 
-Docker is an OpenSource tool this is used to create, deploy, and run applications as containers. Containers allow the packaging 
+Docker is an OpenSource tool that is used to create, deploy, and run applications as containers. Containers allow the packaging 
 of an application and its dependencies, libraries and bineries as one package. This ensures the application will run on any machine 
 that supports and runs Docker.
 
