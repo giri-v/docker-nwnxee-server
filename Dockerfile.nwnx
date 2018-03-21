@@ -25,6 +25,8 @@ RUN apt-get update && \
 
 # Don't mirror logs to stdout, NWNX_ServerLogRedirector takes care of that.
 ENV NWN_TAIL_LOGS=n
+ENV NWNX_CORE_LOG_LEVEL=5
+ENV NWNX_SERVERLOGREDIRECTOR_LOG_LEVEL=6
 
 ENV NWNX_CORE_LOAD_PATH=/nwn/nwnx/
 ENV NWN_LD_PRELOAD=/nwn/nwnx/NWNX_Core.so
