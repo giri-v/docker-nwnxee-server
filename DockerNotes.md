@@ -60,6 +60,15 @@ several advantages:
 
 Configuration is esily managed using `docker-compose`. [examples](https://gitlab.com/glorwinger/nwnx-docker-builder/tree/master/examples).
 
+When Docker containers are started using a docker-compose.yml file they share a network and each service name is assigned an IP address 
+allowing the containers to communicate using those names. To access the containers from the host ports can be mapped and exposed.  The examples below 
+are set up to start the nwnserver and any other dependencies (MySQL or PostgreSQL).  NWNX can be configured and server settings can be passed to the containers.
+The containers will store data on the host machine allowing persistence accross upgrades.
+
+The examples have the following:
+* [docker-compose-mysql](https://gitlab.com/glorwinger/nwnx-docker-builder/blob/master/examples/docker-compose-mysql.yml) Start nwnserver and MySQL. The nwnserver will wait for the MySQL instance to be running before starting.
+* [docker-compose-postgresql](https://gitlab.com/glorwinger/nwnx-docker-builder/blob/master/examples/docker-compose-postgresql.yml)  Start nwnserver and PostgreSQL. The nwnserver will wait for the PostgreSQL instance to be running before starting.
+
 ## Run
 
 ### With docker-compose
@@ -144,10 +153,6 @@ To function properly, the container needs access to the
 ```
 docker-compose up -d nwnserver
 ```
-
-`-v` mounts a host directory as a volume in the container. `--link nwn-mysql:mysql` creates a link between the mysql container and the nwn-devbase-test container. Note: the name following the colon - *mysql* in this case - is the name of the server, and must correspond with the database server specified in the nwnx2.ini, but this should work out of the box unless it has been changed in the Dockerfile. `-p` specifies which container ports to expose to the host system. Docker will not expose UDP by default and must be specified to enable nwserver connections.
-
-If you need haks, overrides, or other custom files they should be placed in the *server* directory.
 
 
 ## Play
