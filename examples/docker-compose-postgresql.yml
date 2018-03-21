@@ -6,6 +6,7 @@ services:
       - "5121:5121/udp"
     links:
       - "db:db"
+    tty: true
     environment:
       NWN_PORT: 5121
       NWN_MODULE: 
