@@ -58,7 +58,7 @@ several advantages:
 
 ## Configure
 
-Configuration is esily managed using `docker-compose`. You can find an example in [./docker-compose.yml](https://github.com/jakkn/nwn-devbase/blob/master/docker/docker-compose.yml).
+Configuration is esily managed using `docker-compose`. [examples](https://gitlab.com/glorwinger/nwnx-docker-builder/tree/master/examples).
 
 ## Run
 
